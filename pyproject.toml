@@ -11,12 +11,13 @@ testpaths = [
 ]
 
 [project]
-name = "openwakeword"
+name = "openwakeword-pruned"
 version = "0.5.1"
 authors = [
-  { name="David Scripka", email="david.scripka@gmail.com" },
+  { name="David Scripka" },
+  { name="Siran Shen" },
 ]
-description = "An open-source audio wake word (or phrase) detection framework with a focus on performance and simplicity"
+description = "A pruned version of the open source framework 'openwakeword' by David Scripka"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -27,4 +28,4 @@ classifiers = [
 dynamic = ["dependencies", "optional-dependencies"]
 
 [project.urls]
-"Homepage" = "https://github.com/dscripka/openWakeWord"
+"Homepage" = "https://github.com/siranshen/openWakeWord-Pruned"

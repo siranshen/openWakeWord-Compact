@@ -36,8 +36,6 @@ from pathlib import Path
 import collections
 import pytest
 import platform
-import pickle
-import tempfile
 import mock
 
 # Download models needed for tests
@@ -104,22 +102,6 @@ class TestModels:
             openwakeword.Model(wakeword_models=[
                                             os.path.join("openwakeword", "resources", "models", "alexa_v0.1.tflite")
                                         ], inference_framework="tflite")
-
-    def test_predict_with_custom_verifier_model(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            # Train custom verifier model with random data
-            verifier_model = openwakeword.custom_verifier_model.train_verifier_model(np.random.random((2, 1536)), np.array([0, 1]))
-            pickle.dump(verifier_model, open(os.path.join(tmp_dir, "test_verifier.pkl"), "wb"))
-
-            # Load model with verifier
-            owwModel = openwakeword.Model(
-                wakeword_models=[os.path.join("openwakeword", "resources", "models", "alexa_v0.1.onnx")],
-                inference_framework="onnx",
-                custom_verifier_models={"alexa_v0.1": os.path.join(tmp_dir, "test_verifier.pkl")},
-                custom_verifier_threshold=0.0
-            )
-
-            owwModel.predict(np.random.randint(-1000, 1000, 1280).astype(np.int16))
 
     def test_load_pretrained_model_by_name(self):
         # Load model with defaults
